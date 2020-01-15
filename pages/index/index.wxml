@@ -1,13 +1,48 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class="search">
+	<input type="text" placeholder="搜索"></input>
+</view>
+<view class='banner'>
+	<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+		<block wx:for="{{bannerList}}" wx:key="*this">
+			<swiper-item>
+				<!-- <view class="swiper-item {{item}}"></view> -->
+				<image src="{{item.image_src}}"></image>
+			</swiper-item>
+		</block>
+	</swiper>
+</view>
+
+<view class="nev">
+	<block wx:for="{{navList}}" wx:key="index">
+		<view class="nev-i">
+			<image src="{{item.image_src}}"></image>
+		</view>
+	</block>
+</view>
+<view class="indexContent">
+	<block wx:for="{{contentList}}" wx:key='index'>
+		<view class="contentTitle">
+			<view class="titleImg">
+				<image src="{{item.floor_title.image_src}}"></image>
+			</view>
+			<view class="bottomImg">
+
+				<view class="leftImg">
+					<view class="img">
+						<image class="box" src="{{item.product_list[0].image_src}}"></image>
+					</view>
+				</view>
+				<view class="rightImg">
+					<block wx:for="{{item.product_list}}" wx:for-index="i" wx:for-item="v" wx:key="i">
+						<view class="img" wx:if="{{i!==0}}">
+							<image src="{{v.image_src}}"></image>
+						</view>
+
+					</block>
+				</view>
+			</view>
+		</view>
+	</block>
+
 </view>
